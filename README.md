@@ -1,2 +1,2 @@
-# mysnip
+# mysnippet
 My R snippets repo
