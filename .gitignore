@@ -35,5 +35,6 @@ vignettes/*.pdf
 *.utf8.md
 *.knit.md
 
-# R Environment Variables
-.Renviron
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
