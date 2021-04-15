@@ -1,0 +1,187 @@
+---
+output: html_document
+---
+
+# Load essential packages
+```{r}
+# remotes::install_github("rstudio/distill")
+# remotes::install_github("rstudio/rmarkdown")
+```
+
+```{r}
+if (!require(xfun)) install.packages("xfun")
+pkgs <- c(
+  "distill",
+  "postcards",
+  "devtools",
+  "usethis",
+  "roxygen2",
+  "sinew",
+  "rmarkdown",
+  "here",
+  "fs"
+)
+
+xfun::pkg_attach2(pkgs, message = FALSE)
+```
+
+# Create a website / blog
+website is a collection of pages while blog is a collection of posts.  
+
+**Note on distill blog**:
+- it is a website with blog posts.  
+- it has a special page called listing page.  
+- it requires to render each post to work.
+
+```{r}
+meta <- list(
+  dir = "blog2",
+  blog_title <- "Piyayut's Blog",
+  author <- "Piyayut Chitchumnong",
+  gh <- "https://github.com/piyayut-ch"
+)
+
+create_website(dir = meta$dir, title = meta$title, , gh_pages = TRUE)
+# create_blog(dir = meta$dir, title = meta$title)
+# setwd(meta$dir)
+```
+
+```{r}
+setwd(meta$dir)
+```
+
+```{r}
+create_postcard(file = "tobi.Rmd")
+```
+
+```{r}
+create_article(file = "tobi",         # future name of .Rmd file
+               template = "jolla",    # name of template
+               package = "postcards") # package that includes the template
+```
+
+```{r}
+create_theme("postcards")
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+## Config `_site.yml`
+
+```{r eval=FALSE}
+---
+name: ""
+title: ""
+description: |
+  <some text>
+base_url: <url>
+navbar:
+  logo: <path to png>
+  search: false/true
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - icon: fa fa-facebook
+      href: <url>
+    - icon: fa fa-github
+      href: <url>
+    - icon: fa fa-twitter
+      href: <url>
+    - icon: fa fa-rss
+      href: index.xml
+  source_url: <url>
+google_analytics: ""
+twitter:
+  site: "@user"
+  creator: "@user"
+collections:
+  posts:
+    feed_item_max: num or false
+    disqus: <disqus shortname>
+rss:
+  full_content: true/false
+  categories:
+    - 
+output: distill::distill_article
+---
+```
+
+# about.Rmd
+
+```{r}
+create_postcard(file = "about.Rmd")
+```
+
+# gallery.Rmd
+
+
+# index.Rmd
+
+
+# Create a post / article
+
+```{r}
+distill::create_article("")
+distill::create_post("setup-R", draft = TRUE)
+```
+
+```{r}
+distill::create_theme("theme_distill.css")
+```
+
+## config post yml
+
+```{r eval=FALSE}
+---
+title: ""
+description: |
+  "some text"
+date: "yyyy-mm-dd" or Sys.Date()
+author:
+  - first_name: "Piyayut"
+    last_name: "Chitchumnong"
+    url: https://github.com/piyayut-ch
+    affiliation: NABC
+    affiliation_url: https://www.nabc.org
+    orcid_id: 0000-0003-0645-5666
+categories:
+  - 
+bibliography: biblio.bib
+citation: true/false
+preview: <path>
+output:
+  distill::distill_article:
+    toc: true
+    toc_depth: 2
+    self_contained: false
+draft :true/false
+---
+```
+
+## render blog
+
+```{r}
+blog_date <- "2021-02-25"
+blog_title <- "setup-r"
+rmarkdown::render(glue::glue("_posts/{blog_date}-{blog_title}/{blog_title}.Rmd"))
+```
+
+## render website
+
+```{r}
+rmarkdown::render_site()
+```
+
+# Publish via Github Page
+
+```{r}
+file.create(".nojekyll")
+```

@@ -8,84 +8,84 @@ xfun::pkg_attach2(pkgs)
 
 
 #1 Pick a name
-pkg <- "mocdata"
+pkg <- "customdict"
 author <- "Piyayut Chitchumnong"
 available(pkg)
-edit_r_profile()
+usethis::edit_r_profile()
 
 
 #2 One time modification
-setwd("../..") #getwd()
-create_package(pkg)
+usethis::create_package(pkg)
 setwd(pkg)
+here::set_here()
 
 ## use git
-use_git()
-use_github()
+usethis::use_git()
+usethis::use_github()
 
 ## pick a license
-use_mit_license(author)
-use_gpl3_license()
-use_apl2_license()
-use_cc0_license()
+usethis::use_mit_license(author)
+# use_gpl3_license()
+# use_apl2_license()
+# use_cc0_license()
 
 ## initial readme file
-use_readme_rmd()
-use_readme_md()
+usethis::use_readme_rmd()
+usethis::use_readme_md()
 
 ## continuous integration
-use_travis()
-use_appveyor()
-use_coverage()
+usethis::use_travis()
+usethis::use_appveyor()
+usethis::use_coverage()
 
 ## test
-use_testthat()
+usethis::use_testthat()
 
 ## data
-use_data_raw()
+usethis::use_data_raw()
 
 ## import requirements
-use_pipe()
-use_pkgdown()
+usethis::use_pipe()
+usethis::use_pkgdown()
 
 # check setup
 proj_sitrep()
 
 
 #3 Write R functions
-use_r("get_moc_price")
+use_r("")
 use_package("dplyr")
 
-load_all()
+devtools::load_all()
 
-makeOxyFile("R", overwrite = TRUE)
-document()
+sinew::makeOxyFile("path.to.R", overwrite = TRUE)
+devtools::document()
 
-check()
+devtools::check()
 
-install()
-use_vignette()
-use_version()
-
-
-#4 Manage data
-## put raw data on data-raw folder
-## write R script in data-raw
+devtools::install()
+usethis::use_vignette()
+usethis::use_version()
 
 
-#5 build website for sharing
+# 4 Manage data
+# # put raw data on data-raw folder
+# # write R script in data-raw
 
-build_site()
+
+# 5 build website for sharing
+
+pkgdown::build_site()
 # Metadata in _pkgdown.yml i.e.
 # template:
 #   params:
 #     bootswatch: spacelab
 #     ganalytics: 
 
-build_home()
+pkgdown::build_home()
 # create and update index.md or README.md
 
-build_reference() 
+pkgdown::build_reference()
 # update _pkgdown.yml
 # reference:
 # - title: "Connecting to Spark"
@@ -97,8 +97,8 @@ build_reference()
 #   - spark_config
 #   - spark_connect
 
-build_articles()
+pkgdown::build_articles()
 # update vignettes
 
-build_news()
+pkgdown::build_news()
 # update NEWS.md

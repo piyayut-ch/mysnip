@@ -1,0 +1,38 @@
+```{r}
+pkgs <- c(
+  "shiny",
+  "bs4Dash",
+  "fresh",
+  "rmarkdown"
+)
+xfun::pkg_attach2(pkgs)
+```
+
+```{r}
+ui <- dashboardPage(
+  title = "Basic Dashboard",
+  header = dashboardHeader(), #required
+  sidebar = dashboardSidebar(), #required
+  body = dashboardBody(), #required
+  controlbar = dashboardControlbar(), #optional
+  footer = dashboardFooter(), #optional
+  skin = NULL,
+  freshTheme = NULL,
+  preloader = NULL,
+  options = NULL,
+  fullscreen = FALSE,
+  help = FALSE,
+  dark = TRUE,
+  scrollToTop = FALSE
+)
+
+server <- function(input, output) {}
+```
+
+```{r}
+
+```
+
+```{r}
+shinyApp(ui, server)
+```
